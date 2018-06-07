@@ -1,0 +1,16 @@
+service {
+        "SLT_REPLICATION"."ZHT_WIW_PERS_FYS" as "Person" 
+    with  ( "MANDT",
+            "HOOFDPERNR",
+            "TITEL",
+            "FAMNAAM",
+            "VOORNAAM",
+            "GSMNUMMER",
+            "URL_FOTO")
+    navigates ("EmailAdresses" as "Email");
+    "SLT_REPLICATION"."ZHT_WIW_MAILADR" as "Email"
+    with ("MANDT","HOOFDPERNR","SEQNR","MAILADRES");
+    association "EmailAdresses"
+        principal "Person"("HOOFDPERNR") multiplicity "1"
+        dependent "Email"("HOOFDPERNR") multiplicity "*";
+}
